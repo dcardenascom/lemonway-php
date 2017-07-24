@@ -1,0 +1,30 @@
+{
+    "name": "dcardenascom/lemonway-php",
+    "description": "Wrapper to play with Lemonway API (DirectKit JSON API)",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "David Cardenas",
+            "email": "david@dcardenas.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lemonway\\": "src/"
+        }
+    },
+    "require": {
+        "roave/security-advisories": "dev-master",
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0",
+        "satooshi/php-coveralls": "^1.0"
+    },
+    "scripts": {
+        "test": "vendor/phpunit/phpunit/phpunit -c phpunit.xml"
+    }
+}
