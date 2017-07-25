@@ -18,8 +18,8 @@ use stdClass;
  */
 class WalletModel extends LemonwayObjectModel
 {
-    const ACTION_GET_WALLET_DETAILS = 'GetWalletDetails';
-    const ACTION_GET_KYC_STATUS = 'GetKycStatus';
+    const ACTION_GET_WALLET_DETAILS    = 'GetWalletDetails';
+    const ACTION_GET_KYC_STATUS        = 'GetKycStatus';
     const ACTION_UPDATE_WALLET_DETAILS = 'UpdateWalletDetails';
 
     /** @var string */
