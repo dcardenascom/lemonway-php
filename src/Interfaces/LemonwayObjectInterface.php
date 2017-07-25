@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by David Cardenas
- * GitHub: https://github.com/davidcardenasguia
+ * GitHub: https://github.com/dcardenascom
  * GitLab: https://gitlab.com/dcardenas
  * Site: http://dcardenas.com
  * LinkedIn: https://www.linkedin.com/in/davidcardenasguia/.
