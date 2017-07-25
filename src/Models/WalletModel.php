@@ -9,6 +9,7 @@
 
 namespace Lemonway\Models;
 
+use Lemonway\Exceptions\ApiException;
 use Lemonway\Exceptions\ParameterNotFoundException;
 use stdClass;
 
@@ -19,6 +20,7 @@ class WalletModel extends LemonwayObjectModel
 {
     const ACTION_GET_WALLET_DETAILS = 'GetWalletDetails';
     const ACTION_GET_KYC_STATUS = 'GetKycStatus';
+    const ACTION_UPDATE_WALLET_DETAILS = 'UpdateWalletDetails';
 
     /** @var string */
     private $id = '';
@@ -52,6 +54,279 @@ class WalletModel extends LemonwayObjectModel
     private $companyDescription = '';
     /** @var string */
     private $companyWebsite = '';
+    // @codeCoverageIgnoreStart
+    /** @var string */
+    private $title = '';
+    /** @var string */
+    private $street = '';
+    /** @var string */
+    private $postCode = '';
+    /** @var string */
+    private $city = '';
+    /** @var string */
+    private $country = '';
+    /** @var string */
+    private $phoneNumber = '';
+    /** @var string */
+    private $mobileNumber = '';
+    /** @var \DateTime */
+    private $birthDate;
+    /** @var bool */
+    private $isCompany = false;
+    /** @var string */
+    private $companyIdentificationNumber  = '';
+    /** @var bool */
+    private $isDebtor = false;
+    /** @var string */
+    private $nationality = '';
+    /** @var string */
+    private $birthCity = '';
+    /** @var string */
+    private $birthCountry = '';
+    /** @var string */
+    private $creationIp = '';
+
+    /**
+     * @return string
+     */
+    public function getCreationIp(): string
+    {
+        return $this->creationIp;
+    }
+
+    /**
+     * @param string $creationIp
+     */
+    public function setCreationIp(string $creationIp)
+    {
+        $this->creationIp = $creationIp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    /**
+     * @param string $street
+     */
+    public function setStreet(string $street)
+    {
+        $this->street = $street;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostCode(): string
+    {
+        return $this->postCode;
+    }
+
+    /**
+     * @param string $postCode
+     */
+    public function setPostCode(string $postCode)
+    {
+        $this->postCode = $postCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity(string $city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string $country
+     */
+    public function setCountry(string $country)
+    {
+        $this->country = $country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber(string $phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMobileNumber(): string
+    {
+        return $this->mobileNumber;
+    }
+
+    /**
+     * @param string $mobileNumber
+     */
+    public function setMobileNumber(string $mobileNumber)
+    {
+        $this->mobileNumber = $mobileNumber;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param \DateTime $birthDate
+     */
+    public function setBirthDate(\DateTime $birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCompany(): bool
+    {
+        return $this->isCompany;
+    }
+
+    /**
+     * @param bool $isCompany
+     */
+    public function setIsCompany(bool $isCompany)
+    {
+        $this->isCompany = $isCompany;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompanyIdentificationNumber(): string
+    {
+        return $this->companyIdentificationNumber;
+    }
+
+    /**
+     * @param string $companyIdentificationNumber
+     */
+    public function setCompanyIdentificationNumber(string $companyIdentificationNumber)
+    {
+        $this->companyIdentificationNumber = $companyIdentificationNumber;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDebtor(): bool
+    {
+        return $this->isDebtor;
+    }
+
+    /**
+     * @param bool $isDebtor
+     */
+    public function setIsDebtor(bool $isDebtor)
+    {
+        $this->isDebtor = $isDebtor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNationality(): string
+    {
+        return $this->nationality;
+    }
+
+    /**
+     * @param string $nationality
+     */
+    public function setNationality(string $nationality)
+    {
+        $this->nationality = $nationality;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBirthCity(): string
+    {
+        return $this->birthCity;
+    }
+
+    /**
+     * @param string $birthCity
+     */
+    public function setBirthCity(string $birthCity)
+    {
+        $this->birthCity = $birthCity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBirthCountry(): string
+    {
+        return $this->birthCountry;
+    }
+
+    /**
+     * @param string $birthCountry
+     */
+    public function setBirthCountry(string $birthCountry)
+    {
+        $this->birthCountry = $birthCountry;
+    }
+
+    // @codeCoverageIgnoreEnd
 
     /**
      * @return string
@@ -309,6 +584,13 @@ class WalletModel extends LemonwayObjectModel
         $this->companyWebsite = $companyWebsite;
     }
 
+    /**
+     * @param ClientModel $clientModel
+     * @return bool
+     * @throws ParameterNotFoundException
+     * @throws ApiException
+     * @throws \RuntimeException
+     */
     public function pullDetailsFromLemonway(ClientModel $clientModel): bool
     {
         if ('' === $this->getId()) {
@@ -319,6 +601,59 @@ class WalletModel extends LemonwayObjectModel
 
         $this->resetValues();
         $this->bindFromLemonway($clientModel->getResponseFromAPI(self::ACTION_GET_WALLET_DETAILS, $parameters));
+
+        return true;
+    }
+
+    /**
+     * @param ClientModel $clientModel
+     * @return bool
+     * @throws ParameterNotFoundException
+     * @throws ApiException
+     * @throws \RuntimeException
+     * @codeCoverageIgnore
+     */
+    public function updateDetailsToLemonway(ClientModel $clientModel): bool
+    {
+        if ('' === $this->getId()) {
+            throw new ParameterNotFoundException('Please provide wallet id');
+        }
+
+        $parameters = [
+            'wallet' => $this->getId(),
+            'newEmail' => $this->getEmail(),
+            'newTitle' => $this->getTitle(),
+            'newFirstName' => $this->getFirstName(),
+            'newLastName' => $this->getLastName(),
+            'newStreet' => $this->getStreet(),
+            'newPostCode' => $this->getPostCode(),
+            'newCity' => $this->getCity(),
+            'newCtry' => $this->getCountry(),
+            'newIp' => $this->getCreationIp(),
+            'newPhoneNumber' => $this->getPhoneNumber(),
+            'newMobileNumber' => $this->getMobileNumber(),
+            'newIsCompany' => $this->isCompany(),
+            'newCompanyName' => $this->getCompanyName(),
+            'newCompanyWebsite' => $this->getCompanyWebsite(),
+            'newCompanyDescription' => $this->getCompanyDescription(),
+            'newCompanyIdentificationNumber' => $this->getCompanyIdentificationNumber(),
+            'newIsDebtor' => $this->isDebtor(),
+            'newNationality' => $this->getNationality(),
+            'newBirthcity' => $this->getBirthCity(),
+            'newBirthcountry' => $this->getBirthCountry()
+        ];
+
+        foreach ($parameters as $key => $value) {
+            if ('' === $value) {
+                unset($parameters[$key]);
+            }
+        }
+
+        if ($this->getBirthDate() instanceof \DateTime) {
+            $parameters['newBirthDate'] = $this->getBirthDate()->format('d/m/Y');
+        }
+
+        $clientModel->getResponseFromAPI(self::ACTION_UPDATE_WALLET_DETAILS, $parameters);
 
         return true;
     }

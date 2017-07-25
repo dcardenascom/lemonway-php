@@ -122,6 +122,7 @@ class WalletModelTest extends TestCase
         $client = new ClientModel($this->credentials, self::TEST_URL.'wrongUrl');
         $this->expectException(ApiException::class);
         $client->getResponseFromAPI(WalletModel::ACTION_GET_WALLET_DETAILS);
+        $client->getResponseFromAPI(WalletModel::ACTION_UPDATE_WALLET_DETAILS);
     }
 
     /**
