@@ -74,7 +74,7 @@ class WalletModel extends LemonwayObjectModel
     /** @var bool */
     private $isCompany = false;
     /** @var string */
-    private $companyIdentificationNumber  = '';
+    private $companyIdentificationNumber = '';
     /** @var bool */
     private $isDebtor = false;
     /** @var string */
@@ -586,10 +586,12 @@ class WalletModel extends LemonwayObjectModel
 
     /**
      * @param ClientModel $clientModel
-     * @return bool
+     *
      * @throws ParameterNotFoundException
      * @throws ApiException
      * @throws \RuntimeException
+     *
+     * @return bool
      */
     public function pullDetailsFromLemonway(ClientModel $clientModel): bool
     {
@@ -607,10 +609,12 @@ class WalletModel extends LemonwayObjectModel
 
     /**
      * @param ClientModel $clientModel
-     * @return bool
+     *
      * @throws ParameterNotFoundException
      * @throws ApiException
      * @throws \RuntimeException
+     *
+     * @return bool
      * @codeCoverageIgnore
      */
     public function updateDetailsToLemonway(ClientModel $clientModel): bool
@@ -620,27 +624,27 @@ class WalletModel extends LemonwayObjectModel
         }
 
         $parameters = [
-            'wallet' => $this->getId(),
-            'newEmail' => $this->getEmail(),
-            'newTitle' => $this->getTitle(),
-            'newFirstName' => $this->getFirstName(),
-            'newLastName' => $this->getLastName(),
-            'newStreet' => $this->getStreet(),
-            'newPostCode' => $this->getPostCode(),
-            'newCity' => $this->getCity(),
-            'newCtry' => $this->getCountry(),
-            'newIp' => $this->getCreationIp(),
-            'newPhoneNumber' => $this->getPhoneNumber(),
-            'newMobileNumber' => $this->getMobileNumber(),
-            'newIsCompany' => $this->isCompany(),
-            'newCompanyName' => $this->getCompanyName(),
-            'newCompanyWebsite' => $this->getCompanyWebsite(),
-            'newCompanyDescription' => $this->getCompanyDescription(),
+            'wallet'                         => $this->getId(),
+            'newEmail'                       => $this->getEmail(),
+            'newTitle'                       => $this->getTitle(),
+            'newFirstName'                   => $this->getFirstName(),
+            'newLastName'                    => $this->getLastName(),
+            'newStreet'                      => $this->getStreet(),
+            'newPostCode'                    => $this->getPostCode(),
+            'newCity'                        => $this->getCity(),
+            'newCtry'                        => $this->getCountry(),
+            'newIp'                          => $this->getCreationIp(),
+            'newPhoneNumber'                 => $this->getPhoneNumber(),
+            'newMobileNumber'                => $this->getMobileNumber(),
+            'newIsCompany'                   => $this->isCompany(),
+            'newCompanyName'                 => $this->getCompanyName(),
+            'newCompanyWebsite'              => $this->getCompanyWebsite(),
+            'newCompanyDescription'          => $this->getCompanyDescription(),
             'newCompanyIdentificationNumber' => $this->getCompanyIdentificationNumber(),
-            'newIsDebtor' => $this->isDebtor(),
-            'newNationality' => $this->getNationality(),
-            'newBirthcity' => $this->getBirthCity(),
-            'newBirthcountry' => $this->getBirthCountry()
+            'newIsDebtor'                    => $this->isDebtor(),
+            'newNationality'                 => $this->getNationality(),
+            'newBirthcity'                   => $this->getBirthCity(),
+            'newBirthcountry'                => $this->getBirthCountry(),
         ];
 
         foreach ($parameters as $key => $value) {
