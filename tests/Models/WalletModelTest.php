@@ -212,10 +212,10 @@ class WalletModelTest extends TestCase
             'company_name'        => 'companyName',
             'company_description' => 'companyDescription',
             'company_website'     => 'companyWebsite',
-            'cards'               => [$cardModel->toArray()],
-            'documents'           => [$documentModel->toArray()],
-            'iban_codes'          => [$ibanModel->toArray()],
-            'sdd_mandates'        => [$sddMandateModel->toArray()],
+            'cards'               => ['id' => $cardModel->toArray()],
+            'documents'           => ['id' => $documentModel->toArray()],
+            'iban_codes'          => ['id' => $ibanModel->toArray()],
+            'sdd_mandates'        => ['id' => $sddMandateModel->toArray()],
         ];
 
         return [

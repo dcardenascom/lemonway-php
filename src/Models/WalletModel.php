@@ -694,7 +694,7 @@ class WalletModel extends LemonwayObjectModel
             foreach ($object->d->WALLET->DOCS as $documentObject) {
                 $documentModel = new DocumentModel();
                 $documentModel->bindFromLemonway($documentObject);
-                $this->documents[] = $documentModel;
+                $this->documents[$documentModel->getId()] = $documentModel;
             }
         }
 
@@ -702,7 +702,7 @@ class WalletModel extends LemonwayObjectModel
             foreach ($object->d->WALLET->IBANS as $ibanObject) {
                 $ibanModel = new IbanModel();
                 $ibanModel->bindFromLemonway($ibanObject);
-                $this->ibanCodes[] = $ibanModel;
+                $this->ibanCodes[$ibanModel->getId()] = $ibanModel;
             }
         }
 
@@ -710,7 +710,7 @@ class WalletModel extends LemonwayObjectModel
             foreach ($object->d->WALLET->SDDMANDATES as $mandateObject) {
                 $sddMandateModel = new SddMandateModel();
                 $sddMandateModel->bindFromLemonway($mandateObject);
-                $this->sddMandates[] = $sddMandateModel;
+                $this->sddMandates[$sddMandateModel->getId()] = $sddMandateModel;
             }
         }
 
@@ -718,7 +718,7 @@ class WalletModel extends LemonwayObjectModel
             foreach ($object->d->WALLET->CARDS as $cardObject) {
                 $cardModel = new CardModel();
                 $cardModel->bindFromLemonway($cardObject);
-                $this->cards[] = $cardModel;
+                $this->cards[$cardModel->getId()] = $cardModel;
             }
         }
 
@@ -772,22 +772,22 @@ class WalletModel extends LemonwayObjectModel
 
         /** @var DocumentModel $document */
         foreach ($this->getDocuments() as $document) {
-            $arrayToReturn['documents'][] = $document->toArray();
+            $arrayToReturn['documents'][$document->getId()] = $document->toArray();
         }
 
         /** @var IbanModel $ibanCode */
         foreach ($this->getIbanCodes() as $ibanCode) {
-            $arrayToReturn['iban_codes'][] = $ibanCode->toArray();
+            $arrayToReturn['iban_codes'][$ibanCode->getId()] = $ibanCode->toArray();
         }
 
         /** @var SddMandateModel $sddMandate */
         foreach ($this->getSddMandates() as $sddMandate) {
-            $arrayToReturn['sdd_mandates'][] = $sddMandate->toArray();
+            $arrayToReturn['sdd_mandates'][$sddMandate->getId()] = $sddMandate->toArray();
         }
 
         /** @var CardModel $card */
         foreach ($this->getCards() as $card) {
-            $arrayToReturn['cards'][] = $card->toArray();
+            $arrayToReturn['cards'][$card->getId()] = $card->toArray();
         }
 
         return $arrayToReturn;
