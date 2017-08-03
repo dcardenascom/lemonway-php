@@ -59,9 +59,8 @@ class DocumentModelTest extends TestCase
     }
 
     /**
-     * EXCEPTIONS
+     * EXCEPTIONS.
      */
-
     public function testGetTemporaryFileUrlException()
     {
         $document = new DocumentModel();

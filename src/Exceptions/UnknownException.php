@@ -4,7 +4,7 @@
  * GitHub: https://github.com/dcardenascom
  * GitLab: https://gitlab.com/dcardenas
  * Site: http://dcardenas.com
- * LinkedIn: https://www.linkedin.com/in/davidcardenasguia/
+ * LinkedIn: https://www.linkedin.com/in/davidcardenasguia/.
  */
 
 namespace Lemonway\Exceptions;

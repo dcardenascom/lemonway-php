@@ -196,8 +196,10 @@ class ClientModel extends CommonModel
      * @param string $baseUrl
      * @param string $username
      * @param string $password
-     * @return string
+     *
      * @throws UnknownException
+     *
+     * @return string
      * @codeCoverageIgnore
      */
     public function getCsrfToken(string $baseUrl, string $username, string $password): string
@@ -206,11 +208,12 @@ class ClientModel extends CommonModel
             $gouteClient = new GouteClient();
             $crawler = $gouteClient->request('GET', $baseUrl);
             $form = $crawler->selectButton('Connexion')->form();
-            $crawler = $gouteClient->submit($form, array('username' => $username, 'password' => $password));
+            $crawler = $gouteClient->submit($form, ['username' => $username, 'password' => $password]);
             $csrfToken = $crawler->filterXPath('//*[@id="globalSearchForm"]/div/input')->attr('value');
         } catch (\Exception $e) {
             throw new UnknownException('Error trying to get the csrf_token. Please check the username and password used');
         }
+
         return $csrfToken;
     }
 }

@@ -153,10 +153,12 @@ class DocumentModel extends LemonwayObjectModel
 
     /**
      * @param string $backofficeUrl
-     * @param int $walletLemonwayId
+     * @param int    $walletLemonwayId
      * @param string $csrfToken
-     * @return string
+     *
      * @throws ParameterNotFoundException
+     *
+     * @return string
      */
     public function getTemporaryFileUrl(string $backofficeUrl, int $walletLemonwayId, string $csrfToken): string
     {
@@ -164,9 +166,9 @@ class DocumentModel extends LemonwayObjectModel
             throw new ParameterNotFoundException('id');
         }
 
-        return $backofficeUrl . '/scripts/showDocument.php' .
-            '?user_id=' . $walletLemonwayId .
-            '&doc_id=' . $this->getId() .
-            '&csrf_token=' . $csrfToken;
+        return $backofficeUrl.'/scripts/showDocument.php'.
+            '?user_id='.$walletLemonwayId.
+            '&doc_id='.$this->getId().
+            '&csrf_token='.$csrfToken;
     }
 }
