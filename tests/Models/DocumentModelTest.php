@@ -9,6 +9,7 @@
 
 namespace Lemonway\Tests\Models;
 
+use Lemonway\Exceptions\ParameterNotFoundException;
 use Lemonway\Models\DocumentModel;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -55,6 +56,17 @@ class DocumentModelTest extends TestCase
         $document = new DocumentModel();
         $document->setId(1);
         $this->assertEquals($expectedUrl, $document->getTemporaryFileUrl('https://base.url', 1234, 'csrf_token'));
+    }
+
+    /**
+     * EXCEPTIONS
+     */
+
+    public function testGetTemporaryFileUrlException()
+    {
+        $document = new DocumentModel();
+        $this->expectException(ParameterNotFoundException::class);
+        $document->getTemporaryFileUrl('https://base.url', 1234, 'csrf_token');
     }
 
     /**

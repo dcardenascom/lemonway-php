@@ -160,7 +160,7 @@ class DocumentModel extends LemonwayObjectModel
      */
     public function getTemporaryFileUrl(string $backofficeUrl, int $walletLemonwayId, string $csrfToken): string
     {
-        if (!$this->getId()) {
+        if (!$this->id) {
             throw new ParameterNotFoundException('id');
         }
 
