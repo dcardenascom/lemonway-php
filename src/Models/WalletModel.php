@@ -22,6 +22,19 @@ class WalletModel extends LemonwayObjectModel
     const ACTION_GET_KYC_STATUS = 'GetKycStatus';
     const ACTION_UPDATE_WALLET_DETAILS = 'UpdateWalletDetails';
 
+    const STATUS_INCOMPLETE = '2';
+    const STATUS_REJECTED = '3';
+    const STATUS_KYC_1 = '5';
+    const STATUS_KYC_2 = '6';
+    const STATUS_KYC_3 = '7';
+    const STATUS_EXPIRED = '8';
+    const STATUS_BLOCKED_ = '10';
+    const STATUS_CLOSED = '12';
+    const STATUS_UPDATING_TO_3 = '13';
+    const STATUS_ONE_TIME_CUSTOMER = '14';
+    const STATUS_CROWDLENDING_WALLET = '15';
+    const STATUS_TECHNIQUE_WALLET = '16';
+
     /** @var string */
     private $id = '';
     /** @var float */

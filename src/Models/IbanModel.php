@@ -16,6 +16,11 @@ use stdClass;
  */
 class IbanModel extends LemonwayObjectModel
 {
+    const STATUS_VERIFYING = '4';
+    const STATUS_ENABLED = '5';
+    const STATUS_DISABLED = '8';
+    const STATuS_REJECTED = '9';
+
     /** @var string */
     private $id;
     /** @var string */

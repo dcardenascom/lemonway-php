@@ -16,6 +16,12 @@ use stdClass;
  */
 class SddMandateModel extends LemonwayObjectModel
 {
+    const STATUS_NOT_VALIDATED = '0';
+    const STATUS_ENABLED_6_WORKING_DAYS = '5';
+    const STATUS_ENABLED_3_WORKING_DAYS = '6';
+    const STATUS_DISABLED = '8';
+    const STATUS_REJECTED = '9';
+
     /** @var string */
     private $id;
     /** @var string */
