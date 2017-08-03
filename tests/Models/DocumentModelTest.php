@@ -49,6 +49,14 @@ class DocumentModelTest extends TestCase
         $this->assertEquals($objectFromLemonway->VD, $this->documentModel->getValidityDate()->format('d/m/Y'));
     }
 
+    public function testGetTemporaryFileUrl()
+    {
+        $expectedUrl = 'https://base.url/scripts/showDocument.php?user_id=1234&doc_id=1&csrf_token=csrf_token';
+        $document = new DocumentModel();
+        $document->setId(1);
+        $this->assertEquals($expectedUrl, $document->getTemporaryFileUrl('https://base.url', 1234, 'csrf_token'));
+    }
+
     /**
      * PROVIDERS.
      */

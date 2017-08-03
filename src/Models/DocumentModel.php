@@ -10,6 +10,7 @@
 namespace Lemonway\Models;
 
 use DateTime;
+use Lemonway\Exceptions\ParameterNotFoundException;
 use stdClass;
 
 /**
@@ -148,5 +149,24 @@ class DocumentModel extends LemonwayObjectModel
             'status'        => $this->getStatus(),
             'validity_date' => $this->getValidityDate()->format(DateTime::ATOM),
         ];
+    }
+
+    /**
+     * @param string $backofficeUrl
+     * @param int $walletLemonwayId
+     * @param string $csrfToken
+     * @return string
+     * @throws ParameterNotFoundException
+     */
+    public function getTemporaryFileUrl(string $backofficeUrl, int $walletLemonwayId, string $csrfToken): string
+    {
+        if (!$this->getId()) {
+            throw new ParameterNotFoundException('id');
+        }
+
+        return $backofficeUrl . '/scripts/showDocument.php' .
+            '?user_id=' . $walletLemonwayId .
+            '&doc_id=' . $this->getId() .
+            '&csrf_token=' . $csrfToken;
     }
 }
