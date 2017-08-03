@@ -10,9 +10,11 @@
 namespace Lemonway\Models;
 
 use DateTime;
+use Goutte\Client as GouteClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ServerException;
 use Lemonway\Exceptions\ApiException;
+use Lemonway\Exceptions\UnknownException;
 use stdClass;
 
 /**
@@ -188,5 +190,27 @@ class ClientModel extends CommonModel
     public function getIp(): string
     {
         return $this->ip;
+    }
+
+    /**
+     * @param string $baseUrl
+     * @param string $username
+     * @param string $password
+     * @return string
+     * @throws UnknownException
+     * @codeCoverageIgnore
+     */
+    public function getCsrfToken(string $baseUrl, string $username, string $password): string
+    {
+        try {
+            $gouteClient = new GouteClient();
+            $crawler = $gouteClient->request('GET', $baseUrl);
+            $form = $crawler->selectButton('Connexion')->form();
+            $crawler = $gouteClient->submit($form, array('username' => $username, 'password' => $password));
+            $csrfToken = $crawler->filterXPath('//*[@id="globalSearchForm"]/div/input')->attr('value');
+        } catch (\Exception $e) {
+            throw new UnknownException('Error trying to get the csrf_token. Please check the username and password used');
+        }
+        return $csrfToken;
     }
 }
