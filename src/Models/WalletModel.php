@@ -28,7 +28,7 @@ class WalletModel extends LemonwayObjectModel
     const STATUS_KYC_2 = '6';
     const STATUS_KYC_3 = '7';
     const STATUS_EXPIRED = '8';
-    const STATUS_BLOCKED_ = '10';
+    const STATUS_BLOCKED = '10';
     const STATUS_CLOSED = '12';
     const STATUS_UPDATING_TO_3 = '13';
     const STATUS_ONE_TIME_CUSTOMER = '14';
