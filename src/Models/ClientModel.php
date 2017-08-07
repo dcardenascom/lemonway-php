@@ -11,11 +11,15 @@ namespace Lemonway\Models;
 
 use DateTime;
 use Goutte\Client as GouteClient;
+use Guzzle\Plugin\Cookie\Cookie;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\Exception\ServerException;
 use Lemonway\Exceptions\ApiException;
 use Lemonway\Exceptions\UnknownException;
 use stdClass;
+use Symfony\Component\DomCrawler\Link;
 
 /**
  * Class ClientModel.
@@ -26,6 +30,11 @@ class ClientModel extends CommonModel
     const DEFAULT_VERSION = '4.0';
     const DEFAULT_LANGUAGE = 'en';
     const METHOD = 'POST';
+
+    const FORM_USERNAME_LABEL = 'username';
+    const FORM_PASSWORD_LABEL = 'password';
+    const FORM_SUBMIT_BUTTON_LABEL = 'Connexion';
+    const CSRF_TOKEN_XPATH = '//*[@id="globalSearchForm"]/div/input';
 
     /** @var string */
     private $version;
@@ -215,5 +224,58 @@ class ClientModel extends CommonModel
         }
 
         return $csrfToken;
+    }
+
+    /**
+     * @param string $backofficeBaseUrl
+     * @param int $walletProviderId
+     * @param int $documentProviderId
+     * @return \Psr\Http\Message\StreamInterface
+     * @throws UnknownException
+     */
+    public function downloadDocumentFile(string $backofficeBaseUrl, int $walletProviderId, int $documentProviderId)
+    {
+        try {
+            $gouteClient = new GouteClient();
+            $crawler = $gouteClient->request('GET', $backofficeBaseUrl);
+            $form = $crawler->selectButton(self::FORM_SUBMIT_BUTTON_LABEL)->form();
+            $crawler = $gouteClient->submit($form, [
+                self::FORM_USERNAME_LABEL => $this->lemonwayCredentials->getUsername(),
+                self::FORM_PASSWORD_LABEL => $this->lemonwayCredentials->getPassword()
+            ]);
+            $csrfToken = $crawler->filterXPath(self::CSRF_TOKEN_XPATH)->attr('value');
+            $documentFileUrl = $backofficeBaseUrl . '/scripts/showDocument.php' .
+                '?user_id=' . $walletProviderId .
+                '&doc_id=' . $documentProviderId .
+                '&csrf_token=' . $csrfToken;
+
+            $cookies = $gouteClient->getCookieJar();
+            /** @var \Symfony\Component\BrowserKit\Cookie $values */
+            $cookieValues = $cookies->all()[0];
+
+            $guzzleCookieJar = new CookieJar();
+            $guzzleCookie = new SetCookie();
+            $guzzleCookie->setName($cookieValues->getName());
+            $guzzleCookie->setValue($cookieValues->getValue());
+            $guzzleCookie->setExpires($cookieValues->getExpiresTime());
+            $guzzleCookie->setPath($cookieValues->getPath());
+            $guzzleCookie->setDomain($cookieValues->getDomain());
+            $guzzleCookie->setSecure($cookieValues->isSecure());
+            $guzzleCookie->setHttpOnly($cookieValues->isHttpOnly());
+            $guzzleCookieJar->setCookie($guzzleCookie);
+
+            $guzzleClient = new GuzzleClient([
+                'timeout' => 900,
+                'verify' => false,
+                'cookies' => $guzzleCookieJar
+            ]);
+
+            $request = $guzzleClient->request('GET', $documentFileUrl);
+
+            return $request->getBody();
+
+        } catch (\Exception $e) {
+            throw new UnknownException('Error trying to get the csrf_token. Please check the username and password used');
+        }
     }
 }
