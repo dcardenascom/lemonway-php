@@ -232,6 +232,7 @@ class ClientModel extends CommonModel
      * @param int $documentProviderId
      * @return \Psr\Http\Message\StreamInterface
      * @throws UnknownException
+     * @codeCoverageIgnore
      */
     public function downloadDocumentFile(string $backofficeBaseUrl, int $walletProviderId, int $documentProviderId)
     {
