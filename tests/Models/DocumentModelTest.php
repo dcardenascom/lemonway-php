@@ -9,7 +9,6 @@
 
 namespace Lemonway\Tests\Models;
 
-use Lemonway\Exceptions\ParameterNotFoundException;
 use Lemonway\Models\DocumentModel;
 use PHPUnit\Framework\TestCase;
 use stdClass;
