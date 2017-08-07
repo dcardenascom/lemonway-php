@@ -55,7 +55,7 @@ class ClientModelTest extends TestCase
         );
     }
 
-     public function testGenerateIp()
+    public function testGenerateIp()
     {
         $this->assertNotFalse(filter_var($this->client->generateIp(), FILTER_VALIDATE_IP));
     }
